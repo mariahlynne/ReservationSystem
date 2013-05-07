@@ -1,0 +1,44 @@
+﻿@model ReservationSystem.Models.CustomTable
+@{
+    Layout = null;
+}
+<select id="filterType" style="width: 150px;" onchange="processFilter()">
+    <option value="-1">-- Filter By --</option>
+    <option value="0">Name</option>
+    <option value="2">Party Size</option>
+    <option value="3">Phone</option>
+</select>
+<input id="filterUsage" class="input" type="text" onkeyup="processFilter()" placeholder="Filter" />
+<br />
+<input id="filterDateUsage" class="input" type="text" onkeyup="processFilter()" placeholder="Filter by Date/Time" />
+<table id="view-item-table" class="good-style">
+    <thead>
+        <tr style="border-bottom: 1px solid black; padding: 5px;">
+            @foreach (var header in Model.Headers)
+            {
+                <th style="font-weight: bold; padding: 7px 0px;">@header<i class=" no-opacity"></i></th>
+            }
+            @if (Model.Rows.Any() && Model.Rows.First().ModifyCall != "")
+            {
+                <th style="font-weight: bold; padding: 7px 0px;">Update</th>
+            }
+            <th style="font-weight: bold; padding: 7px 0px;">Cancel</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Model.Rows)
+        {
+            <tr id="view-tr-@row.Id" data-id="@row.Id" class="activity-row">
+                @foreach (var col in row.Columns)
+                {
+                    <td>@col</td>
+                }
+                @if (row.ModifyCall != "")
+                {
+                    <td style="cursor:pointer;" onclick="@row.ModifyCall"><i class="icon-pencil"></i></td>
+                }
+                <td style="cursor:pointer;" onclick="@row.DeleteCall"><i class="icon-trash"></i></td>
+            </tr>
+        }
+    </tbody>
+</table>

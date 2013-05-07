@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="/Scripts/jquery-1.9.1.js"></script>
+    @Scripts.Render("~/bundles/ReservationSystem")
+    @*<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>*@
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+
+    <div id="notify-popover" class="aboveScreen"></div>
+    <div id="top-header">
+        <div id="header-text">Reservation System</div>
+        <div id="sign-out-text" class="hidden">Sign Out</div>
+    </div>
+    <div id="content">
+        <div id="mainArea-header">
+            Welcome to the Reservation System
+        </div>
+        <div id="mainArea">
+            @RenderBody()
+            @Html.Action("LoadView", "Admin")
+        </div>
+    </div>
+    <div id="modal" class="modal hide"></div>
+</body>
+</html>
